@@ -62,17 +62,17 @@ class Cloud:
         self.position_y += self.change_y
         self.position_x += self.change_x
 
-        if self.position_x < (self.radius + 20):
-            self.position_x = (self.radius + 20)
+        if self.position_x < (self.radius + 60):
+            self.position_x = (self.radius + 60)
 
-        if self.position_x > SCREEN_WIDTH - (self.radius + 30):
-            self.position_x = SCREEN_WIDTH - (self.radius + 30)
+        if self.position_x > SCREEN_WIDTH - (self.radius + 95):
+            self.position_x = SCREEN_WIDTH - (self.radius + 95)
 
-        if self.position_y < self.radius:
-            self.position_y = self.radius
+        if self.position_y < (self.radius + 40):
+            self.position_y = (self.radius + 40)
 
-        if self.position_y > SCREEN_HEIGHT - self.radius:
-            self.position_y = SCREEN_HEIGHT - self.radius
+        if self.position_y > SCREEN_HEIGHT - (self.radius + 55):
+            self.position_y = SCREEN_HEIGHT - (self.radius + 55)
 
 
 class MyGame(arcade.Window):
@@ -88,7 +88,10 @@ class MyGame(arcade.Window):
         self.bird = Bird(300, 400, 0, 0, (255, 255, 255))
 
         # Create the cloud
-        self.cloud = Cloud(500, 575, 0, 0, (0, 0, 0), 55)
+        self.cloud = Cloud(500, 575, 0, 0, (0, 0, 0), 0)
+
+        # Create Sound
+        self.error_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
 
     def on_draw(self):
         # Draw grass with bumps

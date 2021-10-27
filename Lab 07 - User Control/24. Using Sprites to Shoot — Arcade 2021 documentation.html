@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html -->
+<html class="writer-html5" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>24. Using Sprites to Shoot — Arcade 2021 documentation</title>
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/pygments.css" type="text/css">
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/theme.css" type="text/css">
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copybutton.css" type="text/css">
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/custom.css" type="text/css">
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/ideal-image-slider.min.css" type="text/css">
+      <link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/default.min.css" type="text/css">
+    <link rel="canonical" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html">
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script type="text/javascript" async="" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/analytics.js.download"></script><script type="text/javascript" async="" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/js"></script><script data-url_root="../../" id="documentation_options" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/documentation_options.js.download"></script>
+        <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/jquery.js.download"></script>
+        <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/underscore.js.download"></script>
+        <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/doctools.js.download"></script>
+        <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/clipboard.min.js.download"></script>
+        <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copybutton.js.download"></script>
+        <script async="async" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/readthedocs-doc-embed.js.download"></script>
+    <script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/theme.js.download"></script>
+    <link rel="index" title="Index" href="https://learn.arcade.academy/en/latest/genindex.html">
+    <link rel="search" title="Search" href="https://learn.arcade.academy/en/latest/search.html">
+    <link rel="next" title="25. Sprites and Walls" href="https://learn.arcade.academy/en/latest/chapters/25_sprites_and_walls/sprites_and_walls.html">
+    <link rel="prev" title="23. Debugging Programs" href="https://learn.arcade.academy/en/latest/chapters/23_debugging/debugging.html"> 
+
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/readthedocs-doc-embed.css" type="text/css">
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": true, "api_host": "https://readthedocs.org", "build_date": "2021-10-25T14:31:30Z", "builder": "sphinx", "canonical_url": null, "commit": "28389529", "docroot": "/source/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "chapters/24_shooting_sprites/shooting_sprites", "programming_language": "py", "project": "arcade-book", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/readthedocs-analytics.js.download" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+<script src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/js(1)" type="text/javascript" async=""></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="https://learn.arcade.academy/en/latest/index.html" class="icon icon-home"> Arcade
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://learn.arcade.academy/en/latest/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current" aria-expanded="true">
+<li class="toctree-l1 current" aria-expanded="true"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/index.html"><button class="toctree-expand" title="Open/close menu"></button>Chapters</a><ul class="" aria-expanded="false">
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/01_foreword/foreword.html">1. Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/02_setup/setup.html">2. Setting Up Your System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/03_version_control/index.html">3. Version Control Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/04_print_statement/print_statement.html">4. The Print Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/05_drawing/drawing.html">5. How to Draw with Your Computer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/06_what_is_a_programming_language/index.html">6. What is a Programming Language?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/07_expressions/expressions.html">7. Variables and Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/08_functions/functions.html">8. Creating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/09_drawing_with_functions/drawing_with_functions.html">9. Drawing With Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/10_if_statements/if_statements.html">10. If Statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/11_for_loops/for_loops.html">11. For Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/12_while_loops/while_loops.html">12. While Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/13_random_numbers/random_numbers.html">13. Random Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/14_advanced_looping/advanced_looping.html">14. Advanced Looping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/15_lists/lists.html">15. Introduction to Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/16_classes/classes.html">16. Classes, Constructors, and Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/17_class_methods/class_methods.html">17. Class Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/18_window_class/window_class.html">18. Using the Window Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/19_user_control/user_control.html">19. User Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/20_sounds/sounds.html">20. Sound Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/21_sprites_and_collisions/sprites.html">21. Sprites And Collisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/22_moving_sprites/moving_sprites.html">22. Moving Sprites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/23_debugging/debugging.html">23. Debugging Programs</a></li>
+<li class="toctree-l2 current" aria-expanded="true"><a class="reference internal current" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#" aria-expanded="true"><button class="toctree-expand" title="Open/close menu"></button>24. Using Sprites to Shoot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#getting-started">24.1. Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#keeping-the-player-at-the-bottom">24.2. Keeping The Player At The Bottom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#moving-the-coins-up">24.3. Moving The Coins Up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#set-up-bullet-list">24.4. Set Up Bullet List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#creating-bullets">24.5. Creating Bullets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#bullet-collisions">24.6. Bullet Collisions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#other-examples">24.7. Other Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/25_sprites_and_walls/sprites_and_walls.html">25. Sprites and Walls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/26_libraries_and_modules/libraries_and_modules.html">26. Libraries and Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/27_searching/searching.html">27. Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/28_array_backed_grids/array_backed_grids.html">28. Array-Backed Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/29_platformers/platformers.html">29. Platformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/30_sorting/sorting.html">30. Sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/31_exceptions/exceptions.html">31. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/32_print_formatting/print_formatting.html">32. String Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/33_recursion/recursion.html">33. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://learn.arcade.academy/en/latest/chapters/xx_venv_setup/index.html">34. Virtual Environments In PyCharm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://learn.arcade.academy/en/latest/labs/index.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://learn.arcade.academy/en/latest/languages.html">Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="https://learn.arcade.academy/en/latest/index.html">Arcade</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="https://learn.arcade.academy/en/latest/index.html" class="icon icon-home"></a> »</li>
+          <li><a href="https://learn.arcade.academy/en/latest/chapters/index.html">Chapters</a> »</li>
+      <li><span class="section-number">24. </span>Using Sprites to Shoot</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/pvcraven/arcade_book/blob/master/source/chapters/24_shooting_sprites/shooting_sprites.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="using-sprites-to-shoot">
+<h1><span class="section-number">24. </span>Using Sprites to Shoot<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#using-sprites-to-shoot" title="Permalink to this headline"></a></h1>
+<p>How do we get sprites that we can shoot?</p>
+<div class="figure align-default" id="id1">
+<img alt="../../_images/sprites_bullet.gif" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/sprites_bullet.gif">
+<p class="caption"><span class="caption-text">Coins shooting</span><a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#id1" title="Permalink to this image"></a></p>
+</div>
+<div class="section" id="getting-started">
+<h2><span class="section-number">24.1. </span>Getting Started<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#getting-started" title="Permalink to this headline"></a></h2>
+<p>First, let’s go back to a program to start with.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Starting program for shooting sprites</span><a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#id2" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div class="highlight"><pre id="codecell0"><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">arcade</span>
+
+<span class="n">SPRITE_SCALING_PLAYER</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">SPRITE_SCALING_COIN</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">SPRITE_SCALING_LASER</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">COIN_COUNT</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">SCREEN_WIDTH</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">SCREEN_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span>
+
+<span class="n">BULLET_SPEED</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<span class="k">class</span> <span class="nc">MyGame</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">Window</span><span class="p">):</span>
+    <span class="sd">""" Main application class. """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">""" Initializer """</span>
+        <span class="c1"># Call the parent class initializer</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">,</span> <span class="s2">"Sprites and Bullets Demo"</span><span class="p">)</span>
+
+        <span class="c1"># Variables that will hold sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Set up the player info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Don't show the mouse cursor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_mouse_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">""" Set up the game and initialize the variables. """</span>
+
+        <span class="c1"># Sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+
+        <span class="c1"># Set up the player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Image from kenney.nl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"character.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_PLAYER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="mi">70</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="p">)</span>
+
+        <span class="c1"># Create the coins</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COIN_COUNT</span><span class="p">):</span>
+
+            <span class="c1"># Create the coin instance</span>
+            <span class="c1"># Coin image from kenney.nl</span>
+            <span class="n">coin</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"coin_01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_COIN</span><span class="p">)</span>
+
+            <span class="c1"># Position the coin</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">)</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">SCREEN_HEIGHT</span><span class="p">)</span>
+
+            <span class="c1"># Add the coin to the lists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+
+        <span class="c1"># Set the background color</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Render the screen.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># This command has to happen before we start drawing</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">start_render</span><span class="p">()</span>
+
+        <span class="c1"># Draw all the sprites.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+        <span class="c1"># Render the text</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">WHITE</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse moves.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse button is clicked.</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+        <span class="sd">""" Movement and game logic """</span>
+
+        <span class="c1"># Call update on all sprites</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">MyGame</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">arcade</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</td></tr></tbody></table></div>
+</div>
+<p>If you run this program, the player should move around the screen, and their
+should be coins. But not much else is happening yet.</p>
+<p>Next, we need a ‘shooting’ image:</p>
+<div class="figure align-default" id="id3">
+<img alt="../../_images/laserBlue01.png" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/laserBlue01.png">
+<p class="caption"><span class="caption-text">laserBlue01.png</span><a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#id3" title="Permalink to this image"></a></p>
+</div>
+<p>Download this image (originally from Kenney.nl) and make sure it is in the same
+folder as your code.</p>
+</div>
+<div class="section" id="keeping-the-player-at-the-bottom">
+<h2><span class="section-number">24.2. </span>Keeping The Player At The Bottom<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#keeping-the-player-at-the-bottom" title="Permalink to this headline"></a></h2>
+<p>Right now the player can move anywhere on the screen. We want to keep that
+sprite fixed to the bottom of the screen.</p>
+<p>To do that, just remove the line of code for moving the player on the y-axis.
+The player will keep the same y value that we set back in the <code class="docutils literal notranslate"><span class="pre">setup</span></code> method.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="k">def</span> <span class="nf">on_mouse_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Called whenever the mouse moves.</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span>
+<span class="hll">    <span class="c1"># REMOVE THIS LINE: self.player_sprite.center_y = y</span>
+</span></pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+</div>
+<div class="section" id="moving-the-coins-up">
+<h2><span class="section-number">24.3. </span>Moving The Coins Up<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#moving-the-coins-up" title="Permalink to this headline"></a></h2>
+<p>We want all the coins above the player. So we can adjust the starting y locations
+to have a starting point of 150 instead of 0. That will keep them above the player.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="c1"># Create the coins</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COIN_COUNT</span><span class="p">):</span>
+
+    <span class="c1"># Create the coin instance</span>
+    <span class="c1"># Coin image from kenney.nl</span>
+    <span class="n">coin</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"coin_01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_COIN</span><span class="p">)</span>
+
+    <span class="c1"># Position the coin</span>
+    <span class="n">coin</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">)</span>
+<span class="hll">    <span class="n">coin</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">)</span>
+</span>
+    <span class="c1"># Add the coin to the lists</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+</div>
+<div class="section" id="set-up-bullet-list">
+<h2><span class="section-number">24.4. </span>Set Up Bullet List<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#set-up-bullet-list" title="Permalink to this headline"></a></h2>
+<p>We need to create a list to manage the bullets. There are four places we need to
+add this <code class="docutils literal notranslate"><span class="pre">bullet_list</span></code> code:</p>
+<ul class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">bullet_list</span></code> variable (Line 26)</p></li>
+<li><p>Create an instance of <code class="docutils literal notranslate"><span class="pre">SpriteList</span></code> (Line 44)</p></li>
+<li><p>Draw the bullet list (Line 83)</p></li>
+<li><p>Update the bullet list (Line 105)</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">Set up bullet list</span><a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#id4" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div class="highlight"><pre id="codecell3"><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">arcade</span>
+
+<span class="n">SPRITE_SCALING_PLAYER</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">SPRITE_SCALING_COIN</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">SPRITE_SCALING_LASER</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">COIN_COUNT</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">SCREEN_WIDTH</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">SCREEN_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span>
+
+<span class="n">BULLET_SPEED</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<span class="k">class</span> <span class="nc">MyGame</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">Window</span><span class="p">):</span>
+    <span class="sd">""" Main application class. """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">""" Initializer """</span>
+        <span class="c1"># Call the parent class initializer</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">,</span> <span class="s2">"Sprites and Bullets Demo"</span><span class="p">)</span>
+
+        <span class="c1"># Variables that will hold sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span> <span class="o">=</span> <span class="kc">None</span>
+</span>
+        <span class="c1"># Set up the player info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Don't show the mouse cursor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_mouse_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">""" Set up the game and initialize the variables. """</span>
+
+        <span class="c1"># Sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+</span>
+        <span class="c1"># Set up the player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Image from kenney.nl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"character.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_PLAYER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="mi">70</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="p">)</span>
+
+        <span class="c1"># Create the coins</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COIN_COUNT</span><span class="p">):</span>
+
+            <span class="c1"># Create the coin instance</span>
+            <span class="c1"># Coin image from kenney.nl</span>
+            <span class="n">coin</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"coin_01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_COIN</span><span class="p">)</span>
+
+            <span class="c1"># Position the coin</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">)</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">)</span>
+
+            <span class="c1"># Add the coin to the lists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+
+        <span class="c1"># Set the background color</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Render the screen.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># This command has to happen before we start drawing</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">start_render</span><span class="p">()</span>
+
+        <span class="c1"># Draw all the sprites.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</span>
+        <span class="c1"># Render the text</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">WHITE</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse moves.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse button is clicked.</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+        <span class="sd">""" Movement and game logic """</span>
+
+        <span class="c1"># Call update on all sprites</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">MyGame</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">arcade</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="section" id="creating-bullets">
+<h2><span class="section-number">24.5. </span>Creating Bullets<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#creating-bullets" title="Permalink to this headline"></a></h2>
+<p>We need to
+create bullets when the user presses the mouse button. We can add an
+<code class="docutils literal notranslate"><span class="pre">on_mouse_press</span></code> method to do something when the user presses the mouse button:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>This will create a bullet, but the bullet will default to the lower left corner.
+You can just barely see it.</p>
+<p>We can give the bullet a position:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+<span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span>
+</span><span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">y</span>
+</span>
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>But this isn’t what we want either. The code above puts the laser where we click
+the mouse. We want the laser to be where the player is. That’s easy:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+<span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span>
+</span><span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span>
+</span>
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>We can even start the bullet a bit ABOVE the player:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+<span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span>
+</span><span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="mi">30</span>
+</span>
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>We can make the bullet move up using the constant <code class="docutils literal notranslate"><span class="pre">BULLET_SPEED</span></code> which
+we set to 5 at the top of the program:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+    <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span>
+    <span class="n">bullet</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="mi">30</span>
+<span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">change_y</span> <span class="o">=</span> <span class="n">BULLET_SPEED</span>
+</span>
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>We can rotate the bullet so it isn’t sideways using the <code class="docutils literal notranslate"><span class="pre">angle</span></code> attribute
+built into the <code class="docutils literal notranslate"><span class="pre">Sprite</span></code> class:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+
+    <span class="c1"># Create a bullet</span>
+    <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+    <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span>
+    <span class="n">bullet</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="mi">30</span>
+    <span class="n">bullet</span><span class="o">.</span><span class="n">change_y</span> <span class="o">=</span> <span class="n">BULLET_SPEED</span>
+<span class="hll">    <span class="n">bullet</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+</span>
+    <span class="c1"># Add the bullet to the appropriate list</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+</div>
+<div class="section" id="bullet-collisions">
+<h2><span class="section-number">24.6. </span>Bullet Collisions<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#bullet-collisions" title="Permalink to this headline"></a></h2>
+<p>Now that we have bullets, how do we get them to collide with the coins?
+We add the following to our applications <code class="docutils literal notranslate"><span class="pre">update</span></code> method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="c1"># Loop through each bullet</span>
+<span class="k">for</span> <span class="n">bullet</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="p">:</span>
+
+    <span class="c1"># Check this bullet to see if it hit a coin</span>
+    <span class="n">hit_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">check_for_collision_with_list</span><span class="p">(</span><span class="n">bullet</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="p">)</span>
+
+    <span class="c1"># If it did, get rid of the bullet</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hit_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bullet</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+
+    <span class="c1"># For every coin we hit, add to the score and remove the coin</span>
+    <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">hit_list</span><span class="p">:</span>
+        <span class="n">coin</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># If the bullet flies off-screen, remove it.</span>
+    <span class="k">if</span> <span class="n">bullet</span><span class="o">.</span><span class="n">bottom</span> <span class="o">&gt;</span> <span class="n">SCREEN_HEIGHT</span><span class="p">:</span>
+        <span class="n">bullet</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</div>
+<p>We loop through each bullet with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. Then we check to see if the
+bullet is hitting any of the coins. If it is, we get rid of the coin. We get
+rid of the bullet.</p>
+<p>We also check to see if the bullet flies off the top of the screen. If it does,
+we get rid of the bullet. This is easy to forget, but if you do, it will cause
+the computer to slow down because you are tracking thousands of bullets that
+have long ago left the space we care about.</p>
+<p>Here’s the full example:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">sprites_bullet.py</span><a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#id5" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div class="highlight"><pre id="codecell11"><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">arcade</span>
+
+<span class="n">SPRITE_SCALING_PLAYER</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">SPRITE_SCALING_COIN</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">SPRITE_SCALING_LASER</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">COIN_COUNT</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">SCREEN_WIDTH</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">SCREEN_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span>
+
+<span class="n">BULLET_SPEED</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+<span class="k">class</span> <span class="nc">MyGame</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">Window</span><span class="p">):</span>
+    <span class="sd">""" Main application class. """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">""" Initializer """</span>
+        <span class="c1"># Call the parent class initializer</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">,</span> <span class="s2">"Sprites and Bullets Demo"</span><span class="p">)</span>
+
+        <span class="c1"># Variables that will hold sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Set up the player info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Don't show the mouse cursor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_mouse_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="sd">""" Set up the game and initialize the variables. """</span>
+
+        <span class="c1"># Sprite lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">SpriteList</span><span class="p">()</span>
+
+        <span class="c1"># Set up the player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Image from kenney.nl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"character.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_PLAYER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="mi">70</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="p">)</span>
+
+        <span class="c1"># Create the coins</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">COIN_COUNT</span><span class="p">):</span>
+
+            <span class="c1"># Create the coin instance</span>
+            <span class="c1"># Coin image from kenney.nl</span>
+            <span class="n">coin</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"coin_01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_COIN</span><span class="p">)</span>
+
+            <span class="c1"># Position the coin</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span><span class="p">)</span>
+            <span class="n">coin</span><span class="o">.</span><span class="n">center_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">)</span>
+
+            <span class="c1"># Add the coin to the lists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+
+        <span class="c1"># Set the background color</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">AMAZON</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Render the screen.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># This command has to happen before we start drawing</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">start_render</span><span class="p">()</span>
+
+        <span class="c1"># Draw all the sprites.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_list</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+        <span class="c1"># Render the text</span>
+        <span class="n">arcade</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">arcade</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">WHITE</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse moves.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">on_mouse_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">button</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Called whenever the mouse button is clicked.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Create a bullet</span>
+        <span class="n">bullet</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">Sprite</span><span class="p">(</span><span class="s2">"laserBlue01.png"</span><span class="p">,</span> <span class="n">SPRITE_SCALING_LASER</span><span class="p">)</span>
+
+        <span class="c1"># The image points to the right, and we want it to point up. So</span>
+        <span class="c1"># rotate it.</span>
+        <span class="n">bullet</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+
+        <span class="c1"># Position the bullet</span>
+        <span class="n">bullet</span><span class="o">.</span><span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">center_x</span>
+        <span class="n">bullet</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_sprite</span><span class="o">.</span><span class="n">top</span>
+
+        <span class="c1"># Add the bullet to the appropriate lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bullet</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+        <span class="sd">""" Movement and game logic """</span>
+
+        <span class="c1"># Call update on all sprites</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="c1"># Loop through each bullet</span>
+        <span class="k">for</span> <span class="n">bullet</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bullet_list</span><span class="p">:</span>
+
+            <span class="c1"># Check this bullet to see if it hit a coin</span>
+            <span class="n">hit_list</span> <span class="o">=</span> <span class="n">arcade</span><span class="o">.</span><span class="n">check_for_collision_with_list</span><span class="p">(</span><span class="n">bullet</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coin_list</span><span class="p">)</span>
+
+            <span class="c1"># If it did, get rid of the bullet</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hit_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">bullet</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+
+            <span class="c1"># For every coin we hit, add to the score and remove the coin</span>
+            <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">hit_list</span><span class="p">:</span>
+                <span class="n">coin</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># If the bullet flies off-screen, remove it.</span>
+            <span class="k">if</span> <span class="n">bullet</span><span class="o">.</span><span class="n">bottom</span> <span class="o">&gt;</span> <span class="n">SCREEN_HEIGHT</span><span class="p">:</span>
+                <span class="n">bullet</span><span class="o">.</span><span class="n">remove_from_sprite_lists</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">MyGame</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">arcade</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <img src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/copy-button.svg" alt="Copy to clipboard">
+    </button></div>
+</td></tr></tbody></table></div>
+</div>
+</div>
+<div class="section" id="other-examples">
+<h2><span class="section-number">24.7. </span>Other Examples<a class="headerlink" href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html#other-examples" title="Permalink to this headline"></a></h2>
+<p>Here are some other examples from <a class="reference external" href="https://api.arcade.academy/en/latest/">Arcade Academy</a>
+and its <a class="reference external" href="https://api.arcade.academy/en/latest/examples/index.html">Example List</a>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://api.arcade.academy/en/latest/examples/sprite_bullets_aimed.html">Aim bullets with mouse</a></p></li>
+<li><p><a class="reference external" href="hhttps://api.arcade.academy/en/latest/examples/sprite_bullets_periodic.html">Enemies shoot periodically</a></p></li>
+<li><p><a class="reference external" href="https://api.arcade.academy/en/latest/examples/sprite_bullets_random.html">Enemies shoot at random times</a></p></li>
+<li><p><a class="reference external" href="https://api.arcade.academy/en/latest/examples/sprite_bullets_enemy_aims.html">Enemies aim at player</a></p></li>
+<li><p><a class="reference external" href="https://api.arcade.academy/en/latest/examples/sprite_explosion.html">Explosions</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="https://learn.arcade.academy/en/latest/chapters/23_debugging/debugging.html" class="btn btn-neutral float-left" title="23. Debugging Programs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="https://learn.arcade.academy/en/latest/chapters/25_sprites_and_walls/sprites_and_walls.html" class="btn btn-neutral float-right" title="25. Sprites and Walls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>© Copyright 2021, Paul Vincent Craven.
+      <span class="commit">Revision <code>28389529</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions"><!-- Inserted RTD Footer -->
+
+<div class="injected">
+
+  
+
+      
+      
+      <dl>
+        <dt>Languages</dt>
+
+        
+        
+        <dd class="rtd-current-item">
+          <a href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html">en</a>
+        </dd>
+
+        
+        
+        
+        
+        
+        <dd>
+          <a href="https://learn.arcade.academy/de/latest/chapters/24_shooting_sprites/shooting_sprites.html">de</a>
+        </dd>
+        
+        
+        
+        
+        
+        <dd>
+          <a href="https://learn.arcade.academy/sv/latest/chapters/24_shooting_sprites/shooting_sprites.html">sv</a>
+        </dd>
+        
+        
+        
+
+      </dl>
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+        <dd class="rtd-current-item">
+          <a href="https://learn.arcade.academy/en/latest/chapters/24_shooting_sprites/shooting_sprites.html">latest</a>
+        </dd>
+        
+      </dl>
+      
+      
+
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+        <dd><a href="https://learn.arcade.academy/_/downloads/en/latest/pdf/">PDF</a></dd>
+        
+        <dd><a href="https://learn.arcade.academy/_/downloads/en/latest/htmlzip/">HTML</a></dd>
+        
+        <dd><a href="https://learn.arcade.academy/_/downloads/en/latest/epub/">Epub</a></dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        
+        <!-- These are kept as relative links for internal installs that are http -->
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://readthedocs.org/projects/arcade-book/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/arcade-book/builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/arcade-book/downloads/">Downloads</a>
+        </dd>
+      </dl>
+      
+
+      
+
+      
+      <dl>
+        <dt>On GitHub</dt>
+        <dd>
+          <a href="https://github.com/pvcraven/arcade_book/blob/master/source/chapters/24_shooting_sprites/shooting_sprites.rst">View</a>
+        </dd>
+        
+        <dd>
+          <a href="https://github.com/pvcraven/arcade_book/edit/master/source/chapters/24_shooting_sprites/shooting_sprites.rst">Edit</a>
+        </dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        <dt>Search</dt>
+        <dd>
+          <div style="padding: 6px;">
+            
+            <form id="flyout-search-form" class="wy-form" target="_blank" action="https://readthedocs.org/projects/arcade-book/search/" method="get">
+              <input type="text" name="q" aria-label="Search docs" placeholder="Search docs">
+              </form>
+          </div>
+        </dd>
+      </dl>
+      
+
+      <hr>
+
+      
+        <small>
+          <span>Hosted by <a href="https://readthedocs.org/">Read the Docs</a></span>
+          <span> · </span>
+          <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+        </small>
+      
+
+      
+
+</div>
+</div>
+  </div>
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./24. Using Sprites to Shoot — Arcade 2021 documentation_files/js(2)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1MTEXJPKRX');
+</script>
+
+
+
+</body></html>

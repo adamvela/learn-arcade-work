@@ -1,36 +1,28 @@
-""" Sprite Sample Program """
-
 import random
 import arcade
 
-# --- Constants ---
 SPRITE_SCALING_PLAYER = 0.5
 SPRITE_SCALING_COIN = 0.2
+SPRITE_SCALING_LASER = 0.8
 COIN_COUNT = 50
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-
-
-class Coin(arcade.Sprite):
-    def update(self):
-        self.center_y -= 1
-        if self.top <= 0:
-            self.bottom = random.randrange(SCREEN_HEIGHT, SCREEN_HEIGHT * 2)
-            self.center_x = random.randrange(SCREEN_WIDTH)
+BULLET_SPEED = 5
 
 
 class MyGame(arcade.Window):
-    """ Our custom Window Class"""
+    """ Main application class. """
 
     def __init__(self):
         """ Initializer """
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprite Example")
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprites and Bullets Demo")
 
         # Variables that will hold sprite lists
         self.player_list = None
         self.coin_list = None
+        self.bullet_list = None
 
         # Set up the player info
         self.player_sprite = None
@@ -43,19 +35,18 @@ class MyGame(arcade.Window):
 
     def setup(self):
         """ Set up the game and initialize the variables. """
-
         # Sprite lists
         self.player_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
-
-        # Score
-        self.score = 0
+        self.bullet_list = arcade.SpriteList()
 
         # Set up the player
-        # Character image from kenney.nl
+        self.score = 0
+
+        # Image from kenney.nl
         self.player_sprite = arcade.Sprite("character.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
-        self.player_sprite.center_y = 50
+        self.player_sprite.bottom = 0
         self.player_list.append(self.player_sprite)
 
         # Create the coins
@@ -63,52 +54,61 @@ class MyGame(arcade.Window):
 
             # Create the coin instance
             # Coin image from kenney.nl
-
-            coin = Coin("coin_01.png", SPRITE_SCALING_COIN)
+            coin = arcade.Sprite("coin_01.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
-            coin.center_y = random.randrange(SCREEN_HEIGHT)
+            coin.center_y = random.randrange(100, SCREEN_HEIGHT)
 
             # Add the coin to the lists
             self.coin_list.append(coin)
 
+        # Set the background color
+        arcade.set_background_color(arcade.color.AMAZON)
+
     def on_draw(self):
-        """ Draw everything """
+        """
+        Render the screen.
+        """
+
+        # This command has to happen before we start drawing
         arcade.start_render()
+
+        # Draw all the sprites.
         self.coin_list.draw()
         self.player_list.draw()
+        self.bullet_list.draw()
 
-        # Put the text on the screen.
-        output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        # Render the text
+        arcade.draw_text(f"Score: {self.score}", 10, 20, arcade.color.WHITE, 14)
 
     def on_mouse_motion(self, x, y, dx, dy):
-        """ Handle Mouse Motion """
-
-        # Move the center of the player sprite to match the mouse x, y
+        """
+        Called whenever the mouse moves.
+        """
         self.player_sprite.center_x = x
-        self.player_sprite.center_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        """
+        Called whenever the mouse button is clicked.
+        """
+        pass
+        bullet = arcade.Sprite("laserBlue01.png", SPRITE_SCALING_LASER)
+        bullet.center_x = self.player_sprite.center_x
+        bullet.angle = 90
+        bullet.bottom = self.player_sprite.top
+        bullet.change_y = BULLET_SPEED
+        self.bullet_list.append(bullet)
+
 
     def update(self, delta_time):
         """ Movement and game logic """
-
-        # Call update on all sprites (The sprites don't do much in this
-        # example though.)
+        # Call update on all sprites
         self.coin_list.update()
-
-        # Generate a list of all sprites that collided with the player.
-        hit_list = arcade.check_for_collision_with_list(self.player_sprite,
-                                                        self.coin_list)
-
-        # Loop through each colliding sprite, remove it, and add to the score.
-        for coin in hit_list:
-            coin.remove_from_sprite_lists()
-            self.score += 1
+        self.bullet_list.update()
 
 
 def main():
-    """ Main method """
     window = MyGame()
     window.setup()
     arcade.run()

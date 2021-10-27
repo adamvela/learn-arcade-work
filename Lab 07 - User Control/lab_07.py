@@ -6,6 +6,8 @@ import arcade
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 800
 MOVEMENT_SPEED = 5
+error_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
+laser_sound = arcade.load_sound("arcade_resources_sounds_laser2.wav")
 
 
 def draw_bird(x, y):
@@ -64,15 +66,19 @@ class Cloud:
 
         if self.position_x < (self.radius + 60):
             self.position_x = (self.radius + 60)
+            arcade.play_sound(error_sound)
 
         if self.position_x > SCREEN_WIDTH - (self.radius + 95):
             self.position_x = SCREEN_WIDTH - (self.radius + 95)
+            arcade.play_sound(error_sound)
 
         if self.position_y < (self.radius + 40):
             self.position_y = (self.radius + 40)
+            arcade.play_sound(error_sound)
 
         if self.position_y > SCREEN_HEIGHT - (self.radius + 55):
             self.position_y = SCREEN_HEIGHT - (self.radius + 55)
+            arcade.play_sound(error_sound)
 
 
 class MyGame(arcade.Window):
@@ -89,9 +95,6 @@ class MyGame(arcade.Window):
 
         # Create the cloud
         self.cloud = Cloud(500, 575, 0, 0, (0, 0, 0), 0)
-
-        # Create Sound
-        self.error_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
 
     def on_draw(self):
         # Draw grass with bumps
@@ -162,6 +165,8 @@ class MyGame(arcade.Window):
             self.cloud.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
             self.cloud.change_y = -MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            arcade.play_sound(self.error_sound)
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.LEFT or key == arcade.key.RIGHT:
@@ -172,6 +177,9 @@ class MyGame(arcade.Window):
     def on_mouse_motion(self, x, y, dx, dy):
         self.bird.position_x = x
         self.bird.position_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        arcade.play_sound(laser_sound)
 
 
 def main():

@@ -1,4 +1,5 @@
 import arcade
+import random
 
 WIDTH = 60
 HEIGHT = 60
@@ -29,10 +30,20 @@ class MyGame(arcade.Window):
             for column in range(COLUMN_COUNT):
                 x = WIDTH / 2 + column * (WIDTH + MARGIN) + MARGIN
                 y = HEIGHT / 2 + row * (HEIGHT + MARGIN) + MARGIN
-                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, arcade.color.WHITE)
+                if self.grid[row][column] == 0:
+                    color = (arcade.color.WHITE)
+                else:
+                    color = arcade.color.GREEN
+                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
 
     def on_mouse_press(self, x, y, button, key_modifiers):
-        pass
+        row = y // (HEIGHT + MARGIN)
+        column = x // (WIDTH + MARGIN)
+        if self.grid[row][column] == 0:
+            self.grid[row][column] = 1
+        else:
+            self.grid[row][column] = 0
+        print("Click", row, column)
 
 
 def main():

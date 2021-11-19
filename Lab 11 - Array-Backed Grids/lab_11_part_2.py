@@ -73,7 +73,13 @@ class MyGame(arcade.Window):
                         number_cell += 1
                 print("Row", row, "has", number_cell, "cells selected")
 
-                print("Column", column, "has", number_cell, "cells selected")
+            for column in range(COLUMN_COUNT):
+                cell_numb = 0
+                for row in range(COLUMN_COUNT):
+                    if self.grid[row][column] == 1:
+                        cell_numb += 1
+                print("Column", column, "has", cell_numb, "cells selected")
+
 
 
 def main():

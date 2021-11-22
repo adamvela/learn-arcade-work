@@ -1,55 +1,39 @@
-import arcade
-import random
 
-WIDTH = 60
-HEIGHT = 60
-MARGIN = 5
-COLUMN_COUNT = 10
-ROW_COUNT = 10
+# print(my_list)
 
-SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
-SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
+# temp = my_list[2]
+# my_list[2] = my_list[0]
+# my_list[0] = temp
 
+# my_list[0], my_list[2] = my_list[2], my_list[0]
+# print(my_list)
 
-class MyGame(arcade.Window):
-    def __init__(self, width, height):
-        super().__init__(width, height)
-        arcade.set_background_color(arcade.color.BLACK)
+# 15 57 14 33 72 79 26 56 42 40
+# 14 57 15 33 72 79 26 56 42 40
 
-        self.grid = []
-        for row in range(ROW_COUNT):
-            self.grid.append([])
-            for column in range(COLUMN_COUNT):
-                self.grid[row].append(0)
+def selection_sort(my_list):
+    for cur_pos in range(len(my_list)):
+        min_pos = cur_pos
+        for scan_pos in range(cur_pos + 1, len(my_list)):
+            if my_list[scan_pos] < my_list[min_pos]:
+                min_pos = scan_pos
 
-        print(self.grid)
-
-    def on_draw(self):
-        arcade.start_render()
-        for row in range(ROW_COUNT):
-            for column in range(COLUMN_COUNT):
-                x = WIDTH / 2 + column * (WIDTH + MARGIN) + MARGIN
-                y = HEIGHT / 2 + row * (HEIGHT + MARGIN) + MARGIN
-                if self.grid[row][column] == 0:
-                    color = (arcade.color.WHITE)
-                else:
-                    color = arcade.color.GREEN
-                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
-
-    def on_mouse_press(self, x, y, button, key_modifiers):
-        row = y // (HEIGHT + MARGIN)
-        column = x // (WIDTH + MARGIN)
-        if self.grid[row][column] == 0:
-            self.grid[row][column] = 1
-        else:
-            self.grid[row][column] = 0
-        print("Click", row, column)
+        temp = my_list[min_pos]
+        my_list[min_pos] = my_list[cur_pos]
+        my_list[cur_pos] = temp
 
 
-def main():
-    window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
-    arcade.run()
+def insertion_sort(my_list):
+    for key_pos in range(1, len(my_list)):
+        key_val = my_list[key_pos]
+        scan_position = key_pos - 1
+        while(scan_position >= 0) and (my_list[scan_position] > key_val):  # worst: 50, avg 25
+            my_list[scan_position + 1] = my_list[scan_position]
+            scan_position -= 1
+
+        my_list[scan_position + 1] = key_val
 
 
-if __name__ == "__main__":
-    main()
+my_list = [15, 57, 14, 33, 72, 79, 26, 56, 42, 40]
+insertion_sort(my_list)
+print(my_list)

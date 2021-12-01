@@ -1,4 +1,3 @@
-""" Sprite Sample Program """
 
 import random
 import arcade
@@ -18,7 +17,7 @@ class MyGame(arcade.Window):
     def __init__(self):
         """ Initializer """
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprite Example")
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 12")
 
         # Variables that will hold sprite lists
         self.craven_list = None
@@ -50,8 +49,8 @@ class MyGame(arcade.Window):
         beer = arcade.Sprite("coin_01.png", SPRITE_SCALING_BEER)
 
         # Position the coin
-        beer.center_x = random.randrange(SCREEN_WIDTH)
-        beer.center_y = random.randrange(SCREEN_HEIGHT)
+        beer.center_x = random.randrange(SCREEN_WIDTH - 5)
+        beer.center_y = random.randrange(SCREEN_HEIGHT - 5)
 
         # Add the coin to the lists
         self.beer_list.append(beer)
@@ -76,6 +75,15 @@ class MyGame(arcade.Window):
             self.craven_sprite.change_x = -CRAVEN_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
             self.craven_sprite.change_x = CRAVEN_MOVEMENT_SPEED
+
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.UP or key == arcade.key.DOWN:
+            self.craven_sprite.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.craven_sprite.change_x = 0
+        elif len(self.worm_list) > 0:
+            self.craven_sprite.center_x = 0
+            self.craven_sprite.center_y = 0
 
     def update(self, delta_time):
         """ Movement and game logic """

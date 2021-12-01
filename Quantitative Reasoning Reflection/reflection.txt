@@ -1,0 +1,10 @@
+1). I used quantitative
+
+2). I showed my solution through successful programs, such as programs that had
+no errors on the side and inserting comments so that anyone else who was
+overlooking the code was able to easily follow along. Because other people are
+overlooking my code, variable names matter, they need to be specific, instead of
+a plain letter like i or j, it should be something like player_speed. This
+allows the person looking at the code to fully understand the code they are
+looking at in its entirety. The same thing goes for function names, the functions
+shouldn't be something like ball they should be like draw_ball

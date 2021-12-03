@@ -12,6 +12,27 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
 
 
+class Player:
+    def __init__(self, position_x, position_y, change_x, change_y):
+        self.position_x = position_x
+        self.position_y = position_y
+        self.change_x = change_x
+        self.change_y = change_y
+
+    def update(self):
+        if self.position_x < self.position_x + 5:
+            self.position_x = self.position_x + 5
+
+        if self.position_x > SCREEN_WIDTH - 5:
+            self.position_x = SCREEN_WIDTH - 5
+
+        if self.position_y < self.position_x - 5:
+            self.position_y = self.position_x - 5
+
+        if self.position_y > SCREEN_HEIGHT - 5:
+            self.position_y = SCREEN_HEIGHT - 5
+
+
 class MyGame(arcade.Window):
     """ Our custom Window Class"""
 
@@ -87,6 +108,7 @@ class MyGame(arcade.Window):
         # example though.)
         self.beer_list.update()
         self.player_list.update()
+
         # Generate a list of all sprites that collided with the player.
         beer_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.beer_list)
 

@@ -39,7 +39,6 @@ class Ball(arcade.Sprite):
         self.change_y = 0
 
     def update(self):
-        # Move the coin
         self.center_x += self.change_x
         self.center_y += self.change_y
 

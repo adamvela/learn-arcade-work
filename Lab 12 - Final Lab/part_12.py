@@ -1,4 +1,3 @@
-""" Sprite Sample Program """
 
 import random
 import arcade
@@ -12,34 +11,13 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
 
 
-class Player:
-    def __init__(self, position_x, position_y, change_x, change_y):
-        self.position_x = position_x
-        self.position_y = position_y
-        self.change_x = change_x
-        self.change_y = change_y
-
-    def update(self):
-        if self.position_x < self.position_x + 5:
-            self.position_x = self.position_x + 5
-
-        if self.position_x > SCREEN_WIDTH - 5:
-            self.position_x = SCREEN_WIDTH - 5
-
-        if self.position_y < self.position_x - 5:
-            self.position_y = self.position_x - 5
-
-        if self.position_y > SCREEN_HEIGHT - 5:
-            self.position_y = SCREEN_HEIGHT - 5
-
-
 class MyGame(arcade.Window):
     """ Our custom Window Class"""
 
     def __init__(self):
         """ Initializer """
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Sprite Example")
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake Game")
 
         # Variables that will hold sprite lists
         self.player_list = None
@@ -95,19 +73,24 @@ class MyGame(arcade.Window):
         """Called whenever a key is pressed. """
         if key == arcade.key.UP:
             self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_x = 0
         elif key == arcade.key.DOWN:
             self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_x = 0
         elif key == arcade.key.LEFT:
             self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_y = 0
         elif key == arcade.key.RIGHT:
             self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_y = 0
 
     def update(self, delta_time):
         """ Movement and game logic """
-        # Call update on all sprites (The sprites don't do much in this
-        # example though.)
         self.beer_list.update()
         self.player_list.update()
+
+        if self.player_sprite.center_x == SCREEN_WIDTH:
+            PLAYER_MOVEMENT_SPEED = 0
 
         # Generate a list of all sprites that collided with the player.
         beer_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.beer_list)
@@ -116,16 +99,16 @@ class MyGame(arcade.Window):
         for beer in beer_hit_list:
             beer.remove_from_sprite_lists()
             self.score += 1
-            # Coin image from kenney.nl
+            # Beer image from heineken.com
             beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
-            # Position the coin
-            beer.center_x = random.randrange(SCREEN_WIDTH)
-            beer.center_y = random.randrange(SCREEN_HEIGHT)
+            # Position the beer
+            beer.center_x = random.randrange(SCREEN_WIDTH + 5)
+            beer.center_y = random.randrange(SCREEN_HEIGHT + 5)
 
-            # Add the coin to the lists
+            # Add the beer to the lists
             self.beer_list.append(beer)
-            self.player_list.draw()
+
 
 
 def main():

@@ -8,7 +8,7 @@ SPRITE_SCALING_BALL = 0.06
 BALL_COUNT = 20
 SPRITE_SCALING_ROCK = 0.06
 ROCK_COUNT = 12
-ball_collect_sound = arcade.load_sound("arcade_resources_sounds_coin3.wav")
+ball_collect_sound = arcade.load_sound("../Lab 12 - Final Lab/arcade_resources_sounds_coin3.wav")
 rock_collect_sound = arcade.load_sound("arcade_resources_sounds_hurt1.wav")
 
 SCREEN_WIDTH = 800
@@ -61,6 +61,7 @@ class MyGame(arcade.Window):
         self.player_list = None
         self.ball_list = None
         self.rock_list = None
+        self.coordinates = []
 
         # Set up the player info
         self.player_sprite = None

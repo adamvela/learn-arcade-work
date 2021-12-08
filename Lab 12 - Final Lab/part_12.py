@@ -6,6 +6,8 @@ import arcade
 SPRITE_SCALING_PLAYER = 0.5
 SPRITE_SCALING_BEER = 0.035
 PLAYER_MOVEMENT_SPEED = 5
+beer_collect_sound = arcade.load_sound("arcade_resources_sounds_coin3.wav")
+
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
@@ -89,9 +91,6 @@ class MyGame(arcade.Window):
         self.beer_list.update()
         self.player_list.update()
 
-        if self.player_sprite.center_x == SCREEN_WIDTH:
-            PLAYER_MOVEMENT_SPEED = 0
-
         # Generate a list of all sprites that collided with the player.
         beer_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.beer_list)
 
@@ -99,16 +98,16 @@ class MyGame(arcade.Window):
         for beer in beer_hit_list:
             beer.remove_from_sprite_lists()
             self.score += 1
+            arcade.play_sound(beer_collect_sound)
             # Beer image from heineken.com
             beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
             # Position the beer
-            beer.center_x = random.randrange(SCREEN_WIDTH + 5)
-            beer.center_y = random.randrange(SCREEN_HEIGHT + 5)
+            beer.center_x = random.randrange(SCREEN_WIDTH + 20)
+            beer.center_y = random.randrange(SCREEN_HEIGHT + 20)
 
             # Add the beer to the lists
             self.beer_list.append(beer)
-
 
 
 def main():

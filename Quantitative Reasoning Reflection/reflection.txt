@@ -1,4 +1,17 @@
-1). I used quantitative
+1). I decided what methods I wanted to use because I knew the things that I
+needed. For example, I knew when to use a for loop if I needed to loop through
+something for a certain amount of times. I would use a while loop if I needed
+something to occur consistently while something else is happening concurrently.
+An if statement was used if I had something that needed to be triggered on a
+certain event. Classes would need to be used when I had a lot of data that
+needed to be stored together for example street name, the house address,
+home phone line etc. I would use functions if I didn't want to recode
+something or if I had drawn something but wanted it in a different position
+everytime, I would make the drawing a function that takes in coordinates
+in its parameter, so I can place the same drawing somewhere else without
+drawing it, and using one line of code. I used lists when I was storing data
+into something, like a list of numbers, or even how many times something has
+collided with a sprite.
 
 2). I showed my solution through successful programs, such as programs that had
 no errors on the side and inserting comments so that anyone else who was
@@ -7,4 +20,18 @@ overlooking my code, variable names matter, they need to be specific, instead of
 a plain letter like i or j, it should be something like player_speed. This
 allows the person looking at the code to fully understand the code they are
 looking at in its entirety. The same thing goes for function names, the functions
-shouldn't be something like ball they should be like draw_ball
+shouldn't be something like ball they should be like draw_ball.
+
+3). Everytime I was coding I would consistently check to see if my code was running
+properly or if it was at least headed on the track where I needed it to be. I would
+also look through errors to ensure that I understood what they meant and where they
+came from so that I would be able to avoid them in the future and write cleaner
+code. Code needs to be consistently checked to ensure that there are not multiple
+bugs to solve for at a time.
+
+4). The limitations are that the numbers don't always give you the answer that you
+are looking for. For example, if we were to check how many arms an average person
+has, the result would be less than two because not everyone has two arms, but the
+answer that we are looking for is 2. We can't replace humans with algorithms
+because then humanity will lose morals over it. Teacher would not worry about
+their morals anymore, they will begin to worry about their evaluation score.

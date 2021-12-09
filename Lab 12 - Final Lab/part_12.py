@@ -9,8 +9,8 @@ SPRITE_SCALING_BEER = 0.035
 # --- Increased player speed, as we'll move one 'step'
 PLAYER_MOVEMENT_SPEED = 64
 beer_collect_sound = arcade.load_sound("arcade_resources_sounds_coin3.wav")
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 2000
+SCREEN_HEIGHT = 1200
 
 
 class MyGame(arcade.Window):
@@ -23,6 +23,7 @@ class MyGame(arcade.Window):
         # Variables that will hold sprite lists
         self.player_list = None
         self.beer_list = None
+        self.game_over = False
 
         # Set up the player info
         self.player_sprite = None
@@ -79,6 +80,7 @@ class MyGame(arcade.Window):
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         # --- Change this to not be self.player_sprite.change_x but just owned by the class
+
         if key == arcade.key.UP:
             self.change_y = PLAYER_MOVEMENT_SPEED
             self.change_x = 0
@@ -112,6 +114,28 @@ class MyGame(arcade.Window):
             player_sprite.position = self.player_list[-1].position
             player_sprite.center_x += self.change_x
             player_sprite.center_y += self.change_y
+            if player_sprite.center_y < 0:
+                self.game_over = True
+                game = "GAME OVER"
+                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
+
+            if player_sprite.center_y > SCREEN_HEIGHT:
+                self.game_over = True
+                game = "GAME OVER"
+                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 4000)
+
+            if player_sprite.center_x < 0:
+                self.game_over = True
+                game = "GAME OVER"
+                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
+
+            if player_sprite.center_x > SCREEN_WIDTH:
+                self.game_over = True
+                game = "GAME OVER"
+                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
+
+            if self.game_over:
+                return
             self.player_list.append(player_sprite)
 
             # --- Remove tail of snake
@@ -134,20 +158,11 @@ class MyGame(arcade.Window):
                 beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
                 # Position the beer
-                beer.center_x = random.randrange(SCREEN_WIDTH + 20)
-                beer.center_y = random.randrange(SCREEN_HEIGHT + 20)
+                beer.center_x = random.randrange(SCREEN_WIDTH - 10)
+                beer.center_y = random.randrange(SCREEN_HEIGHT - 10)
 
                 # Add the beer to the lists
                 self.beer_list.append(beer)
-
-        if self.left < 0:
-            self.change_x = 0
-        if self.right > SCREEN_WIDTH:
-            self.change_x *= -1
-        if self.bottom < 0:
-            self.change_y *= -1
-        if self.top > SCREEN_HEIGHT:
-            self.change_y *= -1
 
 
 def main():

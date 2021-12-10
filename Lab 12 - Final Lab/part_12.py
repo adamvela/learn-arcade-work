@@ -1,5 +1,5 @@
-import random
 
+import random
 import arcade
 
 # --- Constants ---
@@ -213,7 +213,7 @@ class GameOverView(arcade.View):
     """ Class to manage the game over view """
     def on_show(self):
         """ Called when switching to this view"""
-        arcade.set_background_color(arcade.color.BLACK)
+        arcade.set_background_color((245, 90, 66))
 
     def on_draw(self):
         """ Draw the game over view """

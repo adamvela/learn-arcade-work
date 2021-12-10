@@ -3,23 +3,66 @@ import random
 import arcade
 
 # --- Constants ---
-SPRITE_SCALING_PLAYER = 0.5
+SPRITE_SCALING_PLAYER = 0.11
 SPRITE_SCALING_BEER = 0.035
 
 # --- Increased player speed, as we'll move one 'step'
-PLAYER_MOVEMENT_SPEED = 64
-beer_collect_sound = arcade.load_sound("arcade_resources_sounds_coin3.wav")
-SCREEN_WIDTH = 2000
-SCREEN_HEIGHT = 1200
+PLAYER_MOVEMENT_SPEED = 100
+beer_collect_sound = arcade.load_sound("sounds_gulp.wav")
+wall_hit_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
+SCREEN_WIDTH = 1500
+SCREEN_HEIGHT = 800
 
 
-class MyGame(arcade.Window):
+class MenuView(arcade.View):
+    """ Class that manages the 'menu' view. """
+    def on_show(self):
+        """ Called when switching to this view"""
+        arcade.set_background_color((235, 192, 52))
+
+    def on_draw(self):
+        """ Draw the menu """
+        arcade.start_render()
+        arcade.draw_text("Welcome to the Craven Snake Game", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                         arcade.color.WHITE, font_size=35, anchor_x="center")
+        arcade.draw_text("Click the mouse to continue", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.4,
+                         arcade.color.WHITE, font_size=30, anchor_x="center")
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        instructions_view = InstructionView()
+        self.window.show_view(instructions_view)
+
+
+class InstructionView(arcade.View):
+    def on_show(self):
+        arcade.set_background_color(arcade.color.ORANGE_PEEL)
+
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_text("Instructions Screen", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70,
+                         arcade.color.BLACK, font_size=50, anchor_x="center")
+        arcade.draw_text("As we know, Dr.Craven loves his alcohol", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 170,
+                         arcade.color.BLACK, font_size=48, anchor_x="center")
+        arcade.draw_text("Collect the beer to help him with his addiction", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT - 270, arcade.color.BLACK, font_size=46, anchor_x="center")
+        arcade.draw_text("Pressing \"S\" will make the speed of the snake slow.", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT / 1.8, arcade.color.BLACK, font_size=44, anchor_x="center")
+        arcade.draw_text("Pressing \"M\" will make the speed of the snake moderate.", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT / 2.3, arcade.color.BLACK, font_size=43, anchor_x="center")
+        arcade.draw_text("Pressing \"F\" will make the speed of the snake fast.", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT / 3.1, arcade.color.BLACK, font_size=44, anchor_x="center")
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        game_view = MyGame()
+        self.window.show_view(game_view)
+
+
+class MyGame(arcade.View):
     """ Our custom Window Class"""
-
     def __init__(self):
         """ Initializer """
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake Game")
+        super().__init__()
         # Variables that will hold sprite lists
         self.player_list = None
         self.beer_list = None
@@ -38,8 +81,7 @@ class MyGame(arcade.Window):
         self.snake_length = 1
 
         # Don't show the mouse cursor
-        self.set_mouse_visible(False)
-        arcade.set_background_color(arcade.color.AMAZON)
+        self.window.set_mouse_visible(False)
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -52,7 +94,7 @@ class MyGame(arcade.Window):
 
         # Set up the player
         # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite("character.png", SPRITE_SCALING_PLAYER)
+        self.player_sprite = arcade.Sprite("craven3.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_list.append(self.player_sprite)
@@ -61,11 +103,14 @@ class MyGame(arcade.Window):
         beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
         # Position the beer
-        beer.center_x = random.randrange(SCREEN_WIDTH)
-        beer.center_y = random.randrange(SCREEN_HEIGHT)
+        beer.center_x = random.randrange(SCREEN_WIDTH - 20)
+        beer.center_y = random.randrange(SCREEN_HEIGHT - 50)
 
         # Add the beer to the lists
         self.beer_list.append(beer)
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BABY_BLUE)
 
     def on_draw(self):
         """ Draw everything """
@@ -75,12 +120,11 @@ class MyGame(arcade.Window):
 
         # Put the text on the screen.
         output = f"Score: {self.score}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 20, arcade.color.BLACK, 14)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         # --- Change this to not be self.player_sprite.change_x but just owned by the class
-
         if key == arcade.key.UP:
             self.change_y = PLAYER_MOVEMENT_SPEED
             self.change_x = 0
@@ -98,7 +142,6 @@ class MyGame(arcade.Window):
             self.change_y = 0
 
     def update(self, delta_time):
-
         """ Movement and game logic """
         # --- Keep a timer
         self.time += delta_time
@@ -110,29 +153,30 @@ class MyGame(arcade.Window):
             self.time = 0
 
             # --- Create a new character as new head of snake
-            player_sprite = arcade.Sprite("character.png", SPRITE_SCALING_PLAYER)
+            player_sprite = arcade.Sprite("craven3.png", SPRITE_SCALING_PLAYER)
             player_sprite.position = self.player_list[-1].position
             player_sprite.center_x += self.change_x
             player_sprite.center_y += self.change_y
             if player_sprite.center_y < 0:
+                self.change_y = 0
                 self.game_over = True
-                game = "GAME OVER"
-                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
+                game_over_view = GameOverView()
+                self.window.show_view(game_over_view)
+                arcade.play_sound(wall_hit_sound)
 
             if player_sprite.center_y > SCREEN_HEIGHT:
+                self.change_y = 0
                 self.game_over = True
-                game = "GAME OVER"
-                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 4000)
+                arcade.play_sound(wall_hit_sound)
+                game_over_view = GameOverView()
+                self.window.show_view(game_over_view)
 
-            if player_sprite.center_x < 0:
+            if player_sprite.center_x < 0 or player_sprite.center_x > SCREEN_WIDTH:
+                self.change_x = 0
                 self.game_over = True
-                game = "GAME OVER"
-                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
-
-            if player_sprite.center_x > SCREEN_WIDTH:
-                self.game_over = True
-                game = "GAME OVER"
-                arcade.draw_text(game, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 2, arcade.color.WHITE, 400)
+                arcade.play_sound(wall_hit_sound)
+                game_over_view = GameOverView()
+                self.window.show_view(game_over_view)
 
             if self.game_over:
                 return
@@ -158,17 +202,38 @@ class MyGame(arcade.Window):
                 beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
                 # Position the beer
-                beer.center_x = random.randrange(SCREEN_WIDTH - 10)
-                beer.center_y = random.randrange(SCREEN_HEIGHT - 10)
+                beer.center_x = random.randrange(SCREEN_WIDTH - 20)
+                beer.center_y = random.randrange(SCREEN_HEIGHT - 50)
 
                 # Add the beer to the lists
                 self.beer_list.append(beer)
 
 
+class GameOverView(arcade.View):
+    """ Class to manage the game over view """
+    def on_show(self):
+        """ Called when switching to this view"""
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        """ Draw the game over view """
+        arcade.start_render()
+        arcade.draw_text("Game Over you died.", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                         arcade.color.WHITE, 30, anchor_x="center")
+        arcade.draw_text("Press the letter \"P\" to play again", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.4,
+                         arcade.color.WHITE, 25, anchor_x="center")
+
+    def on_key_press(self, key, _modifiers):
+        """ If user hits escape, go back to the main menu view """
+        if key == arcade.key.P:
+            menu_view = MenuView()
+            self.window.show_view(menu_view)
+
+
 def main():
-    """ Main method """
-    window = MyGame()
-    window.setup()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Craven Snake Game")
+    menu_view = MenuView()
+    window.show_view(menu_view)
     arcade.run()
 
 

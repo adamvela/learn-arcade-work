@@ -7,7 +7,7 @@ SPRITE_SCALING_PLAYER = 0.11
 SPRITE_SCALING_BEER = 0.035
 
 # --- Increased player speed, as we'll move one 'step'
-PLAYER_MOVEMENT_SPEED = 100
+PLAYER_MOVEMENT_SPEED = 64
 beer_collect_sound = arcade.load_sound("sounds_gulp.wav")
 wall_hit_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
 SCREEN_WIDTH = 1500
@@ -41,9 +41,9 @@ class InstructionView(arcade.View):
         arcade.start_render()
         arcade.draw_text("Instructions Screen", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70,
                          arcade.color.BLACK, font_size=50, anchor_x="center")
-        arcade.draw_text("As we know, Dr.Craven loves his alcohol", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 170,
+        arcade.draw_text("As we know, Dr.Craven loves his beer.", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 170,
                          arcade.color.BLACK, font_size=48, anchor_x="center")
-        arcade.draw_text("Collect the beer to help him with his addiction", SCREEN_WIDTH / 2,
+        arcade.draw_text("Collect the beer to help him with his addiction.", SCREEN_WIDTH / 2,
                          SCREEN_HEIGHT - 270, arcade.color.BLACK, font_size=46, anchor_x="center")
         arcade.draw_text("Pressing \"S\" will make the speed of the snake slow.", SCREEN_WIDTH / 2,
                          SCREEN_HEIGHT / 1.8, arcade.color.BLACK, font_size=44, anchor_x="center")
@@ -51,9 +51,14 @@ class InstructionView(arcade.View):
                          SCREEN_HEIGHT / 2.3, arcade.color.BLACK, font_size=43, anchor_x="center")
         arcade.draw_text("Pressing \"F\" will make the speed of the snake fast.", SCREEN_WIDTH / 2,
                          SCREEN_HEIGHT / 3.1, arcade.color.BLACK, font_size=44, anchor_x="center")
+        arcade.draw_text("Pressing \"Q\" will quit the game.", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT / 4.7, arcade.color.BLACK, font_size=44, anchor_x="center")
+        arcade.draw_text("Click to the mouse continue.", SCREEN_WIDTH / 2,
+                         SCREEN_HEIGHT / 8.8, arcade.color.BLACK, font_size=42, anchor_x="center")
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         game_view = MyGame()
+        game_view.setup()
         self.window.show_view(game_view)
 
 
@@ -141,6 +146,10 @@ class MyGame(arcade.View):
             self.change_x = PLAYER_MOVEMENT_SPEED
             self.change_y = 0
 
+        elif key == arcade.key.Q:
+            quit_game_view = QuitGame()
+            self.window.show_view(quit_game_view)
+
     def update(self, delta_time):
         """ Movement and game logic """
         # --- Keep a timer
@@ -202,11 +211,32 @@ class MyGame(arcade.View):
                 beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
                 # Position the beer
-                beer.center_x = random.randrange(SCREEN_WIDTH - 20)
-                beer.center_y = random.randrange(SCREEN_HEIGHT - 50)
+                beer.center_x = random.randrange(40, 1480)
+                beer.center_y = random.randrange(50, 750)
 
                 # Add the beer to the lists
                 self.beer_list.append(beer)
+
+
+class QuitGame(arcade.View):
+    """ Class to manage the game over view """
+    def on_show(self):
+        """ Called when switching to this view"""
+        arcade.set_background_color((245, 90, 66))
+
+    def on_draw(self):
+        """ Draw the game over view """
+        arcade.start_render()
+        arcade.draw_text("You quit the game.", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                         arcade.color.WHITE, 30, anchor_x="center")
+        arcade.draw_text("Press the letter \"P\" to play again", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.4,
+                         arcade.color.WHITE, 25, anchor_x="center")
+
+    def on_key_press(self, key, _modifiers):
+        """ If user hits escape, go back to the main menu view """
+        if key == arcade.key.P:
+            menu_view = MenuView()
+            self.window.show_view(menu_view)
 
 
 class GameOverView(arcade.View):

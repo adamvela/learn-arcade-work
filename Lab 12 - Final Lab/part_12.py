@@ -7,8 +7,15 @@ SPRITE_SCALING_PLAYER = 0.11
 SPRITE_SCALING_BEER = 0.035
 
 # --- Increased player speed, as we'll move one 'step'
-PLAYER_MOVEMENT_SPEED = 64
+PLAYER_MOVEMENT_SPEED = 71
+
+# These two sounds from soundcamp.com
 beer_collect_sound = arcade.load_sound("sounds_gulp.wav")
+boo_sound = arcade.load_sound("boo.wav")
+
+# Sound comes from https://www.shockwave-sound.com/sound-effects/scream-sounds/Ouche.wav
+pain_sound = arcade.load_sound("ouch.wav")
+
 wall_hit_sound = arcade.load_sound("arcade_resources_sounds_error1.wav")
 SCREEN_WIDTH = 1500
 SCREEN_HEIGHT = 800
@@ -84,6 +91,7 @@ class MyGame(arcade.View):
         self.change_x = 0
         self.change_y = 0
         self.snake_length = 1
+        self.player_speed = 0.15
 
         # Don't show the mouse cursor
         self.window.set_mouse_visible(False)
@@ -98,8 +106,9 @@ class MyGame(arcade.View):
         self.score = 0
 
         # Set up the player
-        # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite("craven3.png", SPRITE_SCALING_PLAYER)
+        # Face image from
+        # https://blog.jetbrains.com/pycharm/2017/07/interview-paul-craven-on-python-gaming-and-teaching/
+        self.player_sprite = arcade.Sprite("craven9.png", SPRITE_SCALING_PLAYER)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_list.append(self.player_sprite)
@@ -108,8 +117,8 @@ class MyGame(arcade.View):
         beer = arcade.Sprite("heineken-original-bottle.png", SPRITE_SCALING_BEER)
 
         # Position the beer
-        beer.center_x = random.randrange(SCREEN_WIDTH - 20)
-        beer.center_y = random.randrange(SCREEN_HEIGHT - 50)
+        beer.center_x = random.randrange(40, 1480)
+        beer.center_y = random.randrange(50, 750)
 
         # Add the beer to the lists
         self.beer_list.append(beer)
@@ -130,6 +139,15 @@ class MyGame(arcade.View):
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         # --- Change this to not be self.player_sprite.change_x but just owned by the class
+        if key == arcade.key.S:
+            self.player_speed = 0.25
+
+        if key == arcade.key.M:
+            self.player_speed = 0.15
+
+        if key == arcade.key.F:
+            self.player_speed = 0.05
+
         if key == arcade.key.UP:
             self.change_y = PLAYER_MOVEMENT_SPEED
             self.change_x = 0
@@ -149,6 +167,7 @@ class MyGame(arcade.View):
         elif key == arcade.key.Q:
             quit_game_view = QuitGame()
             self.window.show_view(quit_game_view)
+            arcade.play_sound(boo_sound)
 
     def update(self, delta_time):
         """ Movement and game logic """
@@ -157,12 +176,12 @@ class MyGame(arcade.View):
         self.beer_list.update()
         # --- If a certain time has gone by, move
 
-        if self.time > 0.15:
+        if self.time > self.player_speed:
             # --- Reset timer
             self.time = 0
 
             # --- Create a new character as new head of snake
-            player_sprite = arcade.Sprite("craven3.png", SPRITE_SCALING_PLAYER)
+            player_sprite = arcade.Sprite("craven9.png", SPRITE_SCALING_PLAYER)
             player_sprite.position = self.player_list[-1].position
             player_sprite.center_x += self.change_x
             player_sprite.center_y += self.change_y
@@ -186,6 +205,16 @@ class MyGame(arcade.View):
                 arcade.play_sound(wall_hit_sound)
                 game_over_view = GameOverView()
                 self.window.show_view(game_over_view)
+
+            for player in self.player_list:
+                snake_hit_list = arcade.check_for_collision_with_list(player, self.player_list)
+                if snake_hit_list:
+                    self.change_x = 0
+                    self.change_y = 0
+                    self.game_over = True
+                    arcade.play_sound(pain_sound)
+                    game_over_view = GameOverView()
+                    self.window.show_view(game_over_view)
 
             if self.game_over:
                 return
@@ -231,6 +260,7 @@ class QuitGame(arcade.View):
                          arcade.color.WHITE, 30, anchor_x="center")
         arcade.draw_text("Press the letter \"P\" to play again", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.4,
                          arcade.color.WHITE, 25, anchor_x="center")
+        self.window.set_mouse_visible(True)
 
     def on_key_press(self, key, _modifiers):
         """ If user hits escape, go back to the main menu view """
@@ -252,6 +282,7 @@ class GameOverView(arcade.View):
                          arcade.color.WHITE, 30, anchor_x="center")
         arcade.draw_text("Press the letter \"P\" to play again", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.4,
                          arcade.color.WHITE, 25, anchor_x="center")
+        self.window.set_mouse_visible(True)
 
     def on_key_press(self, key, _modifiers):
         """ If user hits escape, go back to the main menu view """
